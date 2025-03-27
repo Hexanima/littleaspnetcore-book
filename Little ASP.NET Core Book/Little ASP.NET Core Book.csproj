@@ -20,8 +20,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Testing\" />
-  </ItemGroup>
-
 </Project>

@@ -26,8 +26,34 @@ public class TodoController : Controller
         {
             Items = items
         };
-        
+
         // res.view()? EJS
         return View(model);
+    }
+
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddItem(NewTodoItem newItem)
+    {
+        if (!ModelState.IsValid) return RedirectToAction("Index");
+
+        bool successful = await _todoItemService.SaveItem(newItem);
+
+        if (!successful)
+        {
+            return BadRequest("Could not add item.");
+        }
+
+        return RedirectToAction("Index");
+    }
+
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> MarkDone(Guid id)
+    {
+        if (id == Guid.Empty) return RedirectToAction("Index");
+
+        bool successful = await _todoItemService.MarkDone(id);
+        if (!successful) return BadRequest("Could not mark as done.");
+
+        return RedirectToAction("Index");
     }
 }

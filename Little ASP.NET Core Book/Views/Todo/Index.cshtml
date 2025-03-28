@@ -1,4 +1,6 @@
 ﻿@model TodoViewModel
+@using Humanizer;
+@using Microsoft.AspNetCore.Components.Web
 
 @{ ViewData["Title"] = "Task List"; }
 
@@ -19,21 +21,26 @@
         {
             <tr>
                 <td>
-                    <input type="checkbox" class="done-checkbox"/>
+                    <form asp-action="MarkDone" method="post">
+                        <input type="checkbox" class="done-checkbox"/>
+                        <input type="hidden" name="id" value="@item.Id" />
+                    </form>
                 </td>
                 <td>@item.Title</td>
-                <td>@item.DueAt</td>
+                <td>@item.DueAt.Humanize()</td>
             </tr>
         }
+
+
         </tbody>
-
-        @if (Model.Items.Length == 0)
-        {
-            <p>NO HAY ITEMS, AGREGUE UNO</p>
-        }
     </table>
-
+    @if (Model.Items.Length == 0)
+    {
+        <tr>NO HAY ITEMS, AGREGUE UNO</tr>
+    }
     <div class="panel-footer add-item-form">
-        FORMULARIO DE COSAS
+        @await Html.PartialAsync("AddItemPartial",
+            new NewTodoItem()
+        )
     </div>
 </div>

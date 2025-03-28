@@ -13,7 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // MOCK DE DATOS
-builder.Services.AddSingleton<ITodoItemService, MockTodoItemService>();
+builder.Services.AddScoped<ITodoItemService, SQLiteTodoItemService>();
 builder.Services.AddMvc();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

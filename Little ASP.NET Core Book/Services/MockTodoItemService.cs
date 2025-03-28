@@ -16,4 +16,14 @@ public class MockTodoItemService : ITodoItemService
 
         return Task.FromResult(new[] { item1, item2 });
     }
+
+    public Task<bool> SaveItem(NewTodoItem item)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> MarkDone(Guid id)
+    {
+        throw new NotImplementedException();
+    }
 }

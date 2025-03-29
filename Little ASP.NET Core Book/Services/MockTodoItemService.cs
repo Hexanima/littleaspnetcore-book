@@ -1,10 +1,11 @@
 ﻿using Little_ASP.NET_Core_Book.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Little_ASP.NET_Core_Book.Services;
 
 public class MockTodoItemService : ITodoItemService
 {
-    public Task<TodoItem[]> GetIncompleteItemsAsync()
+    public Task<TodoItem[]> GetIncompleteItemsAsync(AppUser user)
     {
         TodoItem item1 = new TodoItem
         {
@@ -17,12 +18,12 @@ public class MockTodoItemService : ITodoItemService
         return Task.FromResult(new[] { item1, item2 });
     }
 
-    public Task<bool> SaveItem(NewTodoItem item)
+    public Task<bool> SaveItem(NewTodoItem item, AppUser user)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> MarkDone(Guid id)
+    public Task<bool> MarkDone(Guid id, AppUser user)
     {
         throw new NotImplementedException();
     }

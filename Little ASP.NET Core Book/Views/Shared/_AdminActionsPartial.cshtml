@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Little_ASP.NET_Core_Book.Models
+@inject SignInManager<AppUser> signInManager
+@inject UserManager<AppUser> userManager
+
+@if (signInManager.IsSignedIn(User))
+{
+    AppUser? currentUser = await userManager.GetUserAsync(User);
+    bool isAdmin = currentUser != null && await userManager.IsInRoleAsync(currentUser, Constants.AdministratorRole);
+
+    if (isAdmin)
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-controller="Admin" asp-action="Users">Manage Users</a>
+            </li>
+        </ul>
+    }
+}
